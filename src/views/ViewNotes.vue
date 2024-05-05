@@ -41,26 +41,9 @@ notes
 const newNote = ref('');
 const newNoteRef = ref(null);
 
-const notes = ref([
-    {
-        id: 'id1',
-        content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum ullam in labore obcaecati quis vitae, ea qui quos illo dicta nisi deleniti! Nisi, aliquam necessitatibus suscipit odio excepturi ex recusandae.'
-    },
-    {
-        id: 'id2',
-        content: 'This is a shorter note! Woo!'
-    }
-])
-
 const addNote = () => {
-    let currentDate = new Date().getTime();
-    let id = currentDate.toString();
+    storeNotes.addNote(newNote.value)
 
-    let note = {
-        id,
-        content: newNote.value
-    }
-    notes.value.unshift(note);
     newNote.value = '';
     newNoteRef.value.focus();
 }
