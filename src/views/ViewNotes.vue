@@ -9,12 +9,13 @@
             </div>
             <div class="field is-grouped is-grouped-right">
                 <div class="control">
-                    <button @click="addNote" :disabled="!newNote" class="button is-link has-background-success">Add New Note</button>
+                    <button @click="addNote" :disabled="!newNote" class="button is-link has-background-success">Add New
+                        Note</button>
                 </div>
             </div>
         </div>
 
-        <Note v-for="note in notes" :key="note.id" :note="note" />
+        <Note v-for="note in notes" :key="note.id" :note="note" @deleteClicked="deleteNote" />
 
 
 
@@ -25,7 +26,7 @@
 /*
 imports
 */
-import { ref } from 'vue' 
+import { ref } from 'vue'
 import Note from '@/components/Notes/Note.vue'
 /*
 notes
@@ -39,7 +40,7 @@ const notes = ref([
         content: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum ullam in labore obcaecati quis vitae, ea qui quos illo dicta nisi deleniti! Nisi, aliquam necessitatibus suscipit odio excepturi ex recusandae.'
     },
     {
-        id: 'id1',
+        id: 'id2',
         content: 'This is a shorter note! Woo!'
     }
 ])
@@ -55,5 +56,12 @@ const addNote = () => {
     notes.value.unshift(note);
     newNote.value = '';
     newNoteRef.value.focus();
+}
+
+/*
+delete note
+*/
+const deleteNote = idToDelete => {
+    notes.value = notes.value.filter(note => { return note.id !== idToDelete })
 }
 </script>
